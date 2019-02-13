@@ -4,6 +4,6 @@ namespace BatchProcessingEngine
 {
     public interface IProcessor
     {
-        Task RunAsync();
+        Task RunAsync(ProcessingContext context);
     }
 }

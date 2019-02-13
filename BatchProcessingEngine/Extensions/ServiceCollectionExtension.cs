@@ -7,9 +7,11 @@ namespace BatchProcessingEngine.Extensions
     {
         public static IServiceCollection AddProcessingServices(this IServiceCollection container)
         {
+            container.AddSingleton<IEngine, ProcessingEngine>();
+            container.AddSingleton<IScheduler, ProcessingScheduler>();
+
             container.AddScoped<IExecutor, BasicExecutor>();
-            container.AddScoped<IEngine, ProcessingEngine>();
-            container.AddScoped<IEngineBuilder, ProcessingEngineBuilder>();
+            container.AddScoped<IProcessor, BatchProcessor>();
 
             return container;
         }

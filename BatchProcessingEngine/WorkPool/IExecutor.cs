@@ -8,6 +8,7 @@ namespace BatchProcessingEngine.WorkPool
         /// Execute the given commands asynchronously in other thread.
         /// </summary>
         /// <param name="command">Needs to be executed.</param>
-        Task ExecuteAsync(IProcessor command);
+        /// <param name="context">The processing context.</param>
+        Task ExecuteAsync(IProcessor command, ProcessingContext context);
     }
 }

@@ -19,19 +19,19 @@ namespace BatchProcessingEngine.WorkPool
             return $"{{threads:{DumpThreadInfo()}}}";
         }
 
-        public Task ExecuteAsync(IProcessor command)
+        public Task ExecuteAsync(IProcessor command, ProcessingContext context)
         {
-            return Task.Factory.StartNew(async () => await InnerExecuteAsync(command), TaskCreationOptions.LongRunning);
+            return Task.Factory.StartNew(async () => await InnerExecuteAsync(command, context), TaskCreationOptions.LongRunning);
         }
 
-        private async Task InnerExecuteAsync(IProcessor command)
+        private async Task InnerExecuteAsync(IProcessor command, ProcessingContext context)
         {
             var workerThread = Thread.CurrentThread;
             _threads.Add(workerThread);
 
             try
             {
-                await command.RunAsync();
+                await command.RunAsync(context);
             }
             finally
             {

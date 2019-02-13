@@ -20,10 +20,12 @@
 
         public ProcessingContext Build()
         {
+            var largeBatch = new BatchDescriptor { BatchSize = (int)(_options.ProcessingFactor * _totalThroughput) };
+
             return new ProcessingContext
             {
                 TotalThroughput = _totalThroughput,
-                LargeBatch = new LargeBatch() { BatchSize = (int)(_options.ProcessingFactor * _totalThroughput) }
+                LargeBatch = largeBatch
             };
         }
     }

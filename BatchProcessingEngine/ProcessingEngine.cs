@@ -14,6 +14,7 @@ namespace BatchProcessingEngine
         private readonly ProcessingOptions _options;
         private readonly IScheduler _scheduler;
         private readonly ILogger _logger;
+        private readonly ProcessingDelegate _dataHandler;
 
         public ProcessingEngine(
             IDataProvider dataProvider,

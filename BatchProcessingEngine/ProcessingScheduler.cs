@@ -32,7 +32,7 @@ namespace BatchProcessingEngine
 
             for (var j = 0; j < rounds; j++)
             {
-                context.LargeBatch.BatchNumber = j + 1;
+                context.LargeBatch.BatchSequence = j + 1;
 
                 using (var scope = _serviceProvider.CreateScope())
                 {

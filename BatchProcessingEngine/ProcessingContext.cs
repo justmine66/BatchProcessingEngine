@@ -2,6 +2,8 @@
 {
     public class ProcessingContext
     {
+        public ProcessingDelegate DataHandler { get; set; }
+
         /// <summary>
         /// 数据总吞吐量
         /// </summary>
@@ -21,14 +23,14 @@
     public class BatchDescriptor
     {
         /// <summary>
-        /// 批次，默认（第一轮）：1。
+        /// 批次序列，默认（第一轮）：1。
         /// </summary>
-        public int BatchNumber { get; set; } = 1;
+        public int BatchSequence { get; set; } = 1;
 
         /// <summary>
         /// 批次数量
         /// </summary>
-        public int BatchSize { get; set; }
+        public int BatchSize { get; set; } = 100;
 
         /// <summary>
         /// 检查点标识（上一次处理截止点）

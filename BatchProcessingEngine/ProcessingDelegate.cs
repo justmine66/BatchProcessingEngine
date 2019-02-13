@@ -2,5 +2,5 @@
 
 namespace BatchProcessingEngine
 {
-    public delegate Task ProcessingDelegate(ProcessingContext context);
+    public delegate Task ProcessingDelegate(ProcessingContext context, dynamic payloads);
 }

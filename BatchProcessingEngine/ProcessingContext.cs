@@ -7,10 +7,18 @@
         /// </summary>
         public int TotalThroughput { get; set; }
 
-        public LargeBatch LargeBatch { get; set; }
+        /// <summary>
+        /// 大批次
+        /// </summary>
+        public BatchDescriptor LargeBatch { get; set; }
+
+        /// <summary>
+        /// 小批次
+        /// </summary>
+        public BatchDescriptor SmallBatch { get; set; }
     }
 
-    public class LargeBatch
+    public class BatchDescriptor
     {
         /// <summary>
         /// 批次，默认（第一轮）：1。

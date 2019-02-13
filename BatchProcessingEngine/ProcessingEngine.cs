@@ -1,7 +1,6 @@
 ﻿using BatchProcessingEngine.Exceptions;
-using BatchProcessingEngine.WorkPool;
-using System.Collections.Generic;
-using System.Linq;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,32 +9,41 @@ namespace BatchProcessingEngine
     public class ProcessingEngine : IEngine
     {
         private volatile int _started;
-        private readonly IExecutor _executor;
-        private readonly IEnumerable<IProcessorBuilder> _processor;
 
-        public ProcessingEngine(IExecutor executor, IEnumerable<IProcessorBuilder> processor)
+        private readonly IDataProvider _dataProvider;
+        private readonly ProcessingOptions _options;
+        private readonly IScheduler _scheduler;
+        private readonly ILogger _logger;
+
+        public ProcessingEngine(
+            IDataProvider dataProvider,
+            IOptions<ProcessingOptions> options,
+            IScheduler scheduler,
+            ILogger<ProcessingEngine> logger)
         {
-            _executor = executor;
-            _processor = processor;
+            _dataProvider = dataProvider;
+            _scheduler = scheduler;
+            _logger = logger;
+            _options = options.Value;
         }
 
         public async Task StartAsync()
         {
-            if (_processor == null ||
-                !_processor.Any()) return;
-
             CheckOnlyStartedOnce();
 
-            var rounds = _processor.Count();
-            var workers = new Task[rounds];
-
-            var index = 0;
-            foreach (var processor in _processor)
+            var totalSize = await _dataProvider.GetTotalSizeAsync();
+            if (totalSize <= 0)
             {
-                workers[index++] = _executor.ExecuteAsync(processor.Build());
+                _logger.LogCritical($"[{AppMode.Environment}]Engine Startup failure: Total size to processed is {totalSize}.");
+                return;
             }
 
-            await Task.WhenAll(workers);
+            var context = new ProcessingContextBuilder()
+                .AddTotalSize(totalSize)
+                .AddOptions(_options)
+                .Build();
+
+            await _scheduler.ScheduleAsync(context);
         }
 
         private void CheckOnlyStartedOnce()

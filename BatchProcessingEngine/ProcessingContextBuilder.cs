@@ -1,10 +1,20 @@
-﻿namespace BatchProcessingEngine
+﻿using System;
+
+namespace BatchProcessingEngine
 {
     public class ProcessingContextBuilder
     {
         private ProcessingOptions _options;
         private ProcessingDelegate _dataHandler;
         private int _totalThroughput;
+        private IServiceProvider _container;
+
+        public ProcessingContextBuilder AddServices(IServiceProvider services)
+        {
+            _container = services;
+
+            return this;
+        }
 
         public ProcessingContextBuilder AddTotalSize(int totalThroughput)
         {

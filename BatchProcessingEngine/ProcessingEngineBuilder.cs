@@ -34,6 +34,7 @@ namespace BatchProcessingEngine
             var scheduler = _container.GetRequiredService<IScheduler>();
             var logger = _container.GetRequiredService<ILogger<ProcessingEngine>>();
             var contextBuilder = new ProcessingContextBuilder()
+                .AddServices(_container)
                 .AddDataHandler(pipeLineBuilder.Build())
                 .AddOptions(options.Value);
 

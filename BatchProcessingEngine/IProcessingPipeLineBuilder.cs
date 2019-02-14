@@ -11,7 +11,7 @@ namespace BatchProcessingEngine
         /// </summary>
         /// <param name="middleware">The middleware delegate.</param>
         /// <returns>The <see cref="ProcessingPipeLineBuilder"/>.</returns>
-        IProcessingPipeLineBuilder Use(Func<ProcessingDelegate, ProcessingDelegate> middleware);
+        IProcessingPipeLineBuilder UseMiddleware(Func<ProcessingDelegate, ProcessingDelegate> middleware);
 
         /// <summary>
         /// Builds the delegate used by this engine to process data.

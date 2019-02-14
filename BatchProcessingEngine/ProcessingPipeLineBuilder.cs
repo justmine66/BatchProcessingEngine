@@ -10,7 +10,7 @@ namespace BatchProcessingEngine
 
         public IServiceProvider Services { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public IProcessingPipeLineBuilder Use(Func<ProcessingDelegate, ProcessingDelegate> middleware)
+        public IProcessingPipeLineBuilder UseMiddleware(Func<ProcessingDelegate, ProcessingDelegate> middleware)
         {
             _middlewares.Add(middleware);
             return this;

@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace BatchProcessingEngine
 {
@@ -27,10 +29,15 @@ namespace BatchProcessingEngine
                 configure(pipeLineBuilder);
             }
 
+            var dataProvider = _container.GetRequiredService<IDataProvider>();
+            var options = _container.GetRequiredService<IOptions<ProcessingOptions>>();
+            var scheduler = _container.GetRequiredService<IScheduler>();
+            var logger = _container.GetRequiredService<ILogger<ProcessingEngine>>();
             var contextBuilder = new ProcessingContextBuilder()
-                .AddDataHandler(pipeLineBuilder.Build());
+                .AddDataHandler(pipeLineBuilder.Build())
+                .AddOptions(options.Value);
 
-            var engine = _container.GetRequiredService<IEngine>();
+            var engine = new ProcessingEngine(scheduler, dataProvider, logger, contextBuilder);
             return engine;
         }
     }

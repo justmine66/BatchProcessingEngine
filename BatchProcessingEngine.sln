@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{2CEF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatchProcessingEngine", "BatchProcessingEngine\BatchProcessingEngine.csproj", "{598779B3-16DE-4077-9F96-B5A9B6807BDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatchProcessingMassData", "Samples\BatchProcessingMassData\BatchProcessingMassData.csproj", "{EF992EC5-A1A2-4E5B-A986-50ECB6C0887B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spider", "Samples\Spider\Spider.csproj", "{EF992EC5-A1A2-4E5B-A986-50ECB6C0887B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

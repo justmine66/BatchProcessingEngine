@@ -1,6 +1,5 @@
 ﻿using BatchProcessingEngine.Exceptions;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,22 +9,21 @@ namespace BatchProcessingEngine
     {
         private volatile int _started;
 
-        private readonly IDataProvider _dataProvider;
-        private readonly ProcessingOptions _options;
-        private readonly IScheduler _scheduler;
         private readonly ILogger _logger;
-        private readonly ProcessingDelegate _dataHandler;
+        private readonly IScheduler _scheduler;
+        private readonly IDataProvider _dataProvider;
+        private readonly ProcessingContextBuilder _contextBuilder;
 
         public ProcessingEngine(
-            IDataProvider dataProvider,
-            IOptions<ProcessingOptions> options,
             IScheduler scheduler,
-            ILogger<ProcessingEngine> logger)
+            IDataProvider dataProvider,
+            ILogger<ProcessingEngine> logger,
+            ProcessingContextBuilder contextBuilder)
         {
             _dataProvider = dataProvider;
             _scheduler = scheduler;
             _logger = logger;
-            _options = options.Value;
+            _contextBuilder = contextBuilder;
         }
 
         public async Task StartAsync()
@@ -39,9 +37,8 @@ namespace BatchProcessingEngine
                 return;
             }
 
-            var context = new ProcessingContextBuilder()
+            var context = _contextBuilder
                 .AddTotalSize(totalSize)
-                .AddOptions(_options)
                 .Build();
 
             await _scheduler.ScheduleAsync(context);

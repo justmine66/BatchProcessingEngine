@@ -8,7 +8,7 @@ namespace BatchProcessingEngine
     {
         private readonly List<Func<ProcessingDelegate, ProcessingDelegate>> _middlewares = new List<Func<ProcessingDelegate, ProcessingDelegate>>();
 
-        public IServiceProvider Services { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IServiceProvider Services { get; set; }
 
         public IProcessingPipeLineBuilder UseMiddleware(Func<ProcessingDelegate, ProcessingDelegate> middleware)
         {

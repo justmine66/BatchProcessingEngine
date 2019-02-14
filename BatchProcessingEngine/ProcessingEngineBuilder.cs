@@ -23,7 +23,7 @@ namespace BatchProcessingEngine
 
         public IEngine Build()
         {
-            var pipeLineBuilder = new ProcessingPipeLineBuilder();
+            var pipeLineBuilder = new ProcessingPipeLineBuilder { Services = _container };
             foreach (var configure in _configures)
             {
                 configure(pipeLineBuilder);

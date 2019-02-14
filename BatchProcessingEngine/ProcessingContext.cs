@@ -1,7 +1,22 @@
-﻿namespace BatchProcessingEngine
+﻿using System;
+
+namespace BatchProcessingEngine
 {
     public class ProcessingContext
     {
+        /// <summary>
+        /// 服务容器
+        /// </summary>
+        public IServiceProvider Services { get; set; }
+
+        /// <summary>
+        /// 数据载荷
+        /// </summary>
+        public dynamic Payloads { get; set; }
+
+        /// <summary>
+        /// 数据载荷处理者
+        /// </summary>
         public ProcessingDelegate DataHandler { get; set; }
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace BatchProcessingEngine
             _container = container;
         }
 
-        public IEngineBuilder Configure(Action<IProcessingPipeLineBuilder> configure)
+        public IEngineBuilder ConfigureProcessingPipeLine(Action<IProcessingPipeLineBuilder> configure)
         {
             _configures.Add(configure);
             return this;

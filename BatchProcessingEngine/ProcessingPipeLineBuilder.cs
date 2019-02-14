@@ -8,6 +8,8 @@ namespace BatchProcessingEngine
     {
         private readonly List<Func<ProcessingDelegate, ProcessingDelegate>> _middlewares = new List<Func<ProcessingDelegate, ProcessingDelegate>>();
 
+        public IServiceProvider Services { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public IProcessingPipeLineBuilder Use(Func<ProcessingDelegate, ProcessingDelegate> middleware)
         {
             _middlewares.Add(middleware);
@@ -17,13 +19,13 @@ namespace BatchProcessingEngine
         public ProcessingDelegate Build()
         {
             _middlewares.Reverse();
-            return (context, payloads) =>
+            return context =>
             {
-                ProcessingDelegate next = (_, data) => { return Task.CompletedTask; };
+                ProcessingDelegate next = _ => Task.CompletedTask;
                 foreach (var middleware in _middlewares)
                     next = middleware(next);
 
-                return next(context, payloads);
+                return next(context);
             };
         }
     }

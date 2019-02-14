@@ -9,7 +9,7 @@ namespace BatchProcessingEngine
     public interface IEngine
     {
         /// <summary>
-        /// 启动整个处理流程.
+        /// 启动整个数据处理管道.
         /// </summary>
         Task StartAsync();
     }

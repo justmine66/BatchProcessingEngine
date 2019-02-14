@@ -4,7 +4,7 @@ namespace BatchProcessingEngine
 {
     public interface IEngineBuilder
     {
-        IEngineBuilder Configure(Action<IProcessingPipeLineBuilder> configure);
+        IEngineBuilder ConfigureProcessingPipeLine(Action<IProcessingPipeLineBuilder> configure);
         IEngine Build();
     }
 }

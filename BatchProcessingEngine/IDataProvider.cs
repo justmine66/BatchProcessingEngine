@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace BatchProcessingEngine
 {
@@ -11,10 +10,9 @@ namespace BatchProcessingEngine
         /// <summary>
         /// 根据上下文，获取批数据。
         /// </summary>
-        /// <typeparam name="TPayLoad">数据类型</typeparam>
         /// <param name="context">上下文</param>
         /// <returns>批数据</returns>
-        Task<IEnumerable<TPayLoad>> GetBatchAsync<TPayLoad>(ProcessingContext context);
+        Task<dynamic> GetBatchDataAsync(ProcessingContext context);
 
         /// <summary>
         /// 获取检查点标识

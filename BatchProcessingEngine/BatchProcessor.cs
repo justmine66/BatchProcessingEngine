@@ -47,7 +47,7 @@ namespace BatchProcessingEngine
                             _logger.LogInformation(
                                 $"{Environment.NewLine}Small batch: the {round} round[{start}-{start + batchSize}] beginning...");
 
-                            var payloads = await _dataProvider.GetBatchAsync<dynamic>(context);
+                            var payloads = await _dataProvider.GetBatchDataAsync(context);
                             await context.DataHandler(context, payloads);
 
                             _logger.LogInformation($"Small batch: the {round} round[{start}-{start + batchSize}] ended.");

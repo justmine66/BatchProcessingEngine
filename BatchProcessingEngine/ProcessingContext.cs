@@ -20,6 +20,14 @@ namespace BatchProcessingEngine
         public ProcessingDelegate DataHandler { get; set; }
 
         /// <summary>
+        /// 处理元数据
+        /// </summary>
+        public ProcessingMetaData MetaData { get; set; }
+    }
+
+    public class ProcessingMetaData
+    {
+        /// <summary>
         /// 数据总吞吐量
         /// </summary>
         public int TotalThroughput { get; set; }

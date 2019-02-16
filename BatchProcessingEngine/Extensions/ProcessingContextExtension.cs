@@ -8,13 +8,13 @@
         /// <param name="context">处理上下文</param>
         public static int GetParallelRounds(this ProcessingContext context)
         {
-            if (context?.LargeBatch == null)
+            if (context?.MetaData.LargeBatch == null)
             {
                 return -1;
             }
 
-            var totalSize = context.TotalThroughput;
-            var batchSize = context.LargeBatch.BatchSize;
+            var totalSize = context.MetaData.TotalThroughput;
+            var batchSize = context.MetaData.LargeBatch.BatchSize;
 
             return totalSize % batchSize == 0 ? totalSize / batchSize : (totalSize / batchSize) + 1;
         }
@@ -26,9 +26,12 @@
         {
             return new ProcessingContext()
             {
-                TotalThroughput = context.TotalThroughput,
-                LargeBatch = context.LargeBatch,
-                SmallBatch = context.SmallBatch
+                MetaData = new ProcessingMetaData()
+                {
+                    TotalThroughput = context.MetaData.TotalThroughput,
+                    LargeBatch = context.MetaData.LargeBatch,
+                    SmallBatch = context.MetaData.SmallBatch
+                },
             };
         }
     }

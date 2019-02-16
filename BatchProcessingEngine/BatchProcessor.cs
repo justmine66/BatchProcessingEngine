@@ -28,9 +28,9 @@ namespace BatchProcessingEngine
             if (Interlocked.CompareExchange(ref _running, RunningState.Running, RunningState.Idle) == RunningState.Idle)
             {
                 // 分小批次平滑处理大批次。
-                var largeBatchSize = context.LargeBatch.BatchSize;
-                var smallBatchSize = context.SmallBatch.BatchSize;
-                var round = context.SmallBatch.BatchSequence <= 0 ? 1 : context.SmallBatch.BatchSequence;
+                var largeBatchSize = context.MetaData.LargeBatch.BatchSize;
+                var smallBatchSize = context.MetaData.SmallBatch.BatchSize;
+                var round = context.MetaData.SmallBatch.BatchSequence <= 0 ? 1 : context.MetaData.SmallBatch.BatchSequence;
                 var batchSize = largeBatchSize > smallBatchSize ? smallBatchSize : largeBatchSize;
 
                 var start = 0;
@@ -53,7 +53,7 @@ namespace BatchProcessingEngine
                             _logger.LogInformation($"Small batch: the {round} round[{start}-{start + batchSize}] ended.");
 
                             start += batchSize;
-                            context.SmallBatch.BatchSequence = round++;
+                            context.MetaData.SmallBatch.BatchSequence = round++;
                         }
                     }
                     catch (Exception e)

@@ -42,8 +42,11 @@ namespace BatchProcessingEngine
             return new ProcessingContext
             {
                 DataHandler = _dataHandler,
-                TotalThroughput = _totalThroughput,
-                LargeBatch = largeBatch
+                MetaData = new ProcessingMetaData()
+                {
+                    TotalThroughput = _totalThroughput,
+                    LargeBatch = largeBatch
+                }
             };
         }
     }

@@ -56,6 +56,11 @@ namespace BatchProcessingEngine
         public int BatchSize { get; set; } = 100;
 
         /// <summary>
+        /// 批次偏移量，范围：小于等于 <see cref="BatchSize"/>。
+        /// </summary>
+        public int BatchOffset { get; set; }
+
+        /// <summary>
         /// 检查点标识（上一次处理截止点）
         /// </summary>
         public int CheckPointId { get; set; }

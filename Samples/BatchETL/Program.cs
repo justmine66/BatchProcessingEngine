@@ -1,12 +1,30 @@
-﻿using System;
+﻿using BatchProcessingEngine;
+using System;
+using System.Threading.Tasks;
 
 namespace BatchETL
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            try
+            {
+                var container = ProcessingServiceProvider
+                    .GetServiceProvider();
+
+                var engine = new ProcessingEngineBuilder(container)
+                    .ConfigureProcessingPipeLine(builder => builder.UserDataHandler())
+                    .Build();
+
+                await engine.StartAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            Console.Read();
         }
     }
 }

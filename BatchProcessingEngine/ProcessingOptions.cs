@@ -12,6 +12,6 @@
         /// 以此类推...
         /// 不能整除的情况下，将会多增加一个大批次。
         /// </remarks>
-        public float ProcessingFactor { get; set; }
+        public float ProcessingFactor { get; set; } = 1;
     }
 }

@@ -70,6 +70,11 @@ namespace BatchProcessingEngine
         /// </summary>
         public int CheckPointId { get; set; }
 
+        public override string ToString()
+        {
+            return $"{{BatchSequence: {BatchSequence},BatchSize: {BatchSize},BatchOffset: {BatchOffset},CheckPointId: {CheckPointId}}}";
+        }
+
         /// <summary>
         /// 深复制
         /// </summary>
@@ -91,7 +96,7 @@ namespace BatchProcessingEngine
         /// <returns></returns>
         public BatchDescriptor Clone()
         {
-            return (BatchDescriptor) this.MemberwiseClone();
+            return (BatchDescriptor)this.MemberwiseClone();
         }
     }
 }

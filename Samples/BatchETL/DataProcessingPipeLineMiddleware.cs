@@ -23,7 +23,7 @@ namespace BatchETL
                 return Task.CompletedTask;
 
             foreach (var payload in payloads)
-                Console.WriteLine($@"Start handling: {payload}");
+                Console.WriteLine($@"[{context.MetaData.LargeBatch.BatchSequence}-{context.MetaData.SmallBatch.BatchSequence}]Start handling: {payload}");
 
             return Task.CompletedTask;
         }

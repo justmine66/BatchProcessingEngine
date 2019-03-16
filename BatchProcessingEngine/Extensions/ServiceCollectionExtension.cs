@@ -13,8 +13,8 @@ namespace BatchProcessingEngine.Extensions
             container.AddScoped<IExecutor, BasicExecutor>();
             container.AddScoped<IProcessor, BatchProcessor>();
 
-            container.AddScoped<IMiddlewareFactory, MiddlewareFactory>();
-            container.AddScoped<IProcessingPipeLineBuilder, ProcessingPipeLineBuilder>();
+            container.AddSingleton<IMiddlewareFactory, MiddlewareFactory>();
+            container.AddSingleton<IProcessingPipeLineBuilder, ProcessingPipeLineBuilder>();
 
             return container;
         }

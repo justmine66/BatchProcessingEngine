@@ -38,5 +38,14 @@
                 Payloads = context.Payloads
             };
         }
+
+        public static int BatchOffsetFrom(this ProcessingContext context)
+        {
+            var largeBatch = context.MetaData.LargeBatch;
+            var smallBatch = context.MetaData.SmallBatch;
+            var offsetFrom = largeBatch.CheckPointId + (largeBatch.BatchSequence - 1) * largeBatch.BatchSize + (smallBatch.BatchSequence - 1) * smallBatch.BatchSize;
+
+            return offsetFrom;
+        }
     }
 }

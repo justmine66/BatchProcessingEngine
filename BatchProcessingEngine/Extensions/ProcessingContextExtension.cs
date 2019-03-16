@@ -32,6 +32,9 @@
                     LargeBatch = context.MetaData.LargeBatch,
                     SmallBatch = context.MetaData.SmallBatch
                 },
+                Services = context.Services,
+                DataHandler = context.DataHandler,
+                Payloads = context.Payloads
             };
         }
     }

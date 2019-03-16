@@ -38,7 +38,7 @@ namespace BatchProcessingEngine
                 .AddDataHandler(pipeLineBuilder.Build())
                 .AddOptions(options.Value);
 
-            var engine = new ProcessingEngine(scheduler, dataProvider, logger, contextBuilder, pipeLineBuilder);
+            var engine = new ProcessingEngine(scheduler, dataProvider, logger, contextBuilder);
             return engine;
         }
     }

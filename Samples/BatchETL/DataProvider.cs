@@ -1,5 +1,6 @@
 ﻿using BatchProcessingEngine;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BatchETL
@@ -8,20 +9,27 @@ namespace BatchETL
     {
         public async Task<dynamic> GetBatchDataAsync(ProcessingContext context)
         {
-            var batchSize = context.MetaData.SmallBatch.BatchSize;
-            var largeBatchLastId = context.MetaData.LargeBatch.CheckPointId + (context.MetaData.LargeBatch.BatchSequence - 1) * batchSize;
+            var smallBatch = context.MetaData.SmallBatch;
+            var largeBatch = context.MetaData.LargeBatch;
+            var batchSize = smallBatch.BatchSize;
+            var offsetTo = largeBatch.CheckPointId + smallBatch.BatchSequence * batchSize;
+            var offsetFrom = offsetTo - batchSize;
 
-            return null;
+            var payloads = InMemoryDb.Payloads
+                .Where(it => it.Id >= offsetFrom && it.Id < offsetTo)
+                .Take(batchSize);
+
+            return payloads;
         }
 
         public Task<int> GetCheckPointIdAsync()
         {
-            return Task.FromResult(1);
+            return Task.FromResult(InMemoryDb.Payloads.First().Id);
         }
 
         public Task<int> GetTotalSizeAsync()
         {
-            return Task.FromResult(100);
+            return Task.FromResult(InMemoryDb.Payloads.Count);
         }
     }
 
@@ -31,7 +39,7 @@ namespace BatchETL
 
         static InMemoryDb()
         {
-            for (var i = 1; i <= 1000; i++)
+            for (var i = 1; i <= 200; i++)
                 Payloads.Add(new PayLoad() { Id = i, Content = $"第{i}条内容" });
         }
     }

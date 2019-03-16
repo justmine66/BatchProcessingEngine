@@ -9,15 +9,17 @@ namespace BatchETL
     public class DataProcessingPipeLineMiddleware
     {
         private readonly ILogger _logger;
+        private readonly ProcessingDelegate _next;
 
-        public DataProcessingPipeLineMiddleware(ILogger logger)
+        public DataProcessingPipeLineMiddleware(ILogger<DataProcessingPipeLineMiddleware> logger, ProcessingDelegate next)
         {
             _logger = logger;
+            _next = next;
         }
 
         public Task InvokeAsync(ProcessingContext context)
         {
-            if (!(context.Payloads is IEnumerable<int> payloads))
+            if (!(context.Payloads is IEnumerable<PayLoad> payloads))
                 return Task.CompletedTask;
 
             foreach (var payload in payloads)

@@ -8,6 +8,7 @@ namespace BatchProcessingEngine
         private ProcessingDelegate _dataHandler;
         private int _totalThroughput;
         private IServiceProvider _container;
+        private int _checkPoint;
 
         public ProcessingContextBuilder AddServices(IServiceProvider services)
         {
@@ -19,6 +20,13 @@ namespace BatchProcessingEngine
         public ProcessingContextBuilder AddTotalSize(int totalThroughput)
         {
             _totalThroughput = totalThroughput;
+
+            return this;
+        }
+
+        public ProcessingContextBuilder AddCheckPoint(int checkPoint)
+        {
+            _checkPoint = checkPoint;
 
             return this;
         }
@@ -37,7 +45,11 @@ namespace BatchProcessingEngine
 
         public ProcessingContext Build()
         {
-            var largeBatch = new BatchDescriptor { BatchSize = (int)(_options.ProcessingFactor * _totalThroughput) };
+            var largeBatch = new BatchDescriptor
+            {
+                BatchSize = (int)(_options.ProcessingFactor * _totalThroughput),
+                CheckPointId = _checkPoint
+            };
             var smallBatch = new BatchDescriptor();
 
             return new ProcessingContext

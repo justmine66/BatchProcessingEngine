@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BatchETL
 {
-    public class DataProvider : IDataProvider
+    public class SmallBatchDataProvider : IDataProvider
     {
         public async Task<dynamic> GetBatchDataAsync(ProcessingContext context)
         {

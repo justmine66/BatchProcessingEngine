@@ -29,6 +29,7 @@
                 MetaData = new ProcessingMetaData()
                 {
                     TotalThroughput = context.MetaData.TotalThroughput,
+                    GlobalOffSet = context.MetaData.GlobalOffSet,
                     LargeBatch = context.MetaData.LargeBatch.Copy(),
                     SmallBatch = context.MetaData.SmallBatch.Copy()
                 },

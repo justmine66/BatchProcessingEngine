@@ -1,4 +1,5 @@
 ﻿using BatchProcessingEngine;
+using BatchProcessingEngine.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,11 +10,9 @@ namespace BatchETL
     {
         public async Task<dynamic> GetBatchDataAsync(ProcessingContext context)
         {
-            var smallBatch = context.MetaData.SmallBatch;
-            var largeBatch = context.MetaData.LargeBatch;
-            var batchSize = smallBatch.BatchSize;
-            var offsetTo = largeBatch.CheckPointId + smallBatch.BatchSequence * batchSize;
-            var offsetFrom = offsetTo - batchSize;
+            var batchSize = context.MetaData.SmallBatch.BatchSize;
+            var offsetFrom = context.BatchOffsetFrom();
+            var offsetTo = offsetFrom + batchSize;
 
             var payloads = InMemoryDb.Payloads
                 .Where(it => it.Id >= offsetFrom && it.Id < offsetTo)
@@ -39,7 +38,7 @@ namespace BatchETL
 
         static InMemoryDb()
         {
-            for (var i = 1; i <= 200; i++)
+            for (var i = 1; i <= 400; i++)
                 Payloads.Add(new PayLoad() { Id = i, Content = $"第{i}条内容" });
         }
     }

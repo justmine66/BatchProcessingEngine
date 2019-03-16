@@ -34,11 +34,11 @@ namespace BatchProcessingEngine
                 var batchSize = largeBatchSize > smallBatchSize ? smallBatchSize : largeBatchSize;
 
                 var start = 0;
-                using (_logger.BeginScope($"Data Batch Processor {context}"))
+                using (_logger.BeginScope($"Data Batch Processor[LargeBatch: {context.MetaData.LargeBatch.BatchSequence}]"))
                 {
                     try
                     {
-                        while (start <= largeBatchSize)
+                        while (start < largeBatchSize)
                         {
                             // double check
                             if (_running != RunningState.Running)

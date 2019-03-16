@@ -54,7 +54,7 @@ namespace BatchProcessingEngine
 
                             start += batchSize;
                             context.MetaData.LargeBatch.BatchOffset = start;
-                            context.MetaData.SmallBatch.BatchSequence = round++;
+                            context.MetaData.SmallBatch.BatchSequence = ++round;
                         }
                     }
                     catch (Exception e)

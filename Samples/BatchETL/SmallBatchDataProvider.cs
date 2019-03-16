@@ -1,6 +1,5 @@
 ﻿using BatchProcessingEngine;
 using BatchProcessingEngine.Extensions;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -29,17 +28,6 @@ namespace BatchETL
         public Task<int> GetTotalSizeAsync()
         {
             return Task.FromResult(InMemoryDb.Payloads.Count);
-        }
-    }
-
-    internal static class InMemoryDb
-    {
-        internal static List<PayLoad> Payloads = new List<PayLoad>();
-
-        static InMemoryDb()
-        {
-            for (var i = 1; i <= 400; i++)
-                Payloads.Add(new PayLoad() { Id = i, Content = $"第{i}条内容" });
         }
     }
 }

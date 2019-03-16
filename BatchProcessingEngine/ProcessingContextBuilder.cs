@@ -38,6 +38,7 @@ namespace BatchProcessingEngine
         public ProcessingContext Build()
         {
             var largeBatch = new BatchDescriptor { BatchSize = (int)(_options.ProcessingFactor * _totalThroughput) };
+            var smallBatch = new BatchDescriptor();
 
             return new ProcessingContext
             {
@@ -45,7 +46,8 @@ namespace BatchProcessingEngine
                 MetaData = new ProcessingMetaData()
                 {
                     TotalThroughput = _totalThroughput,
-                    LargeBatch = largeBatch
+                    LargeBatch = largeBatch,
+                    SmallBatch = smallBatch
                 }
             };
         }

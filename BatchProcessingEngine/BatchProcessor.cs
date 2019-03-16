@@ -53,6 +53,7 @@ namespace BatchProcessingEngine
                             _logger.LogInformation($"Small batch: the {round} round[{start}-{start + batchSize}] ended.");
 
                             start += batchSize;
+                            context.MetaData.LargeBatch.BatchOffset = start;
                             context.MetaData.SmallBatch.BatchSequence = round++;
                         }
                     }

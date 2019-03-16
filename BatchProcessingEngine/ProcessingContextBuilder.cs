@@ -42,6 +42,7 @@ namespace BatchProcessingEngine
 
             return new ProcessingContext
             {
+                Services = _container,
                 DataHandler = _dataHandler,
                 MetaData = new ProcessingMetaData()
                 {

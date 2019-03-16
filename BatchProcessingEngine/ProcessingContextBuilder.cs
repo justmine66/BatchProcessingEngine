@@ -45,12 +45,15 @@ namespace BatchProcessingEngine
 
         public ProcessingContext Build()
         {
+            Assert.Range(_options.BatchProcessingFactor, 0, 1);
+            Assert.Range(_options.MicroBatchProcessingFactor, 0, 1);
+
             var largeBatch = new BatchDescriptor
             {
-                BatchSize = (int)(_options.ProcessingFactor * _totalThroughput),
+                BatchSize = (int)(_options.BatchProcessingFactor * _totalThroughput),
                 CheckPointId = _checkPoint
             };
-            var smallBatch = new BatchDescriptor();
+            var smallBatch = new BatchDescriptor() { BatchSize = (int)(_options.MicroBatchProcessingFactor * largeBatch.BatchSize) };
 
             return new ProcessingContext
             {

@@ -36,9 +36,11 @@ namespace BatchProcessingEngine
                 _logger.LogCritical($"[{AppMode.Environment}]Engine Startup failure: Total size to processed is {totalSize}.");
                 return;
             }
+            var checkPoint = await _dataProvider.GetCheckPointIdAsync();
 
             var context = _contextBuilder
                 .AddTotalSize(totalSize)
+                .AddCheckPoint(checkPoint)
                 .Build();
 
             await _scheduler.ScheduleAsync(context);

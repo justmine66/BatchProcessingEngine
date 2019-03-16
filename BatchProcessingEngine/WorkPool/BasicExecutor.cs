@@ -21,7 +21,7 @@ namespace BatchProcessingEngine.WorkPool
 
         public Task ExecuteAsync(IProcessor command, ProcessingContext context)
         {
-            return Task.Factory.StartNew(async () => await InnerExecuteAsync(command, context), TaskCreationOptions.LongRunning);
+            return Task.Factory.StartNew(async state => await InnerExecuteAsync(command, (ProcessingContext)state), context, TaskCreationOptions.LongRunning);
         }
 
         private async Task InnerExecuteAsync(IProcessor command, ProcessingContext context)

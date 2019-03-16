@@ -29,6 +29,7 @@ namespace BatchProcessingEngine
             {
                 var state = context.Copy();
                 state.MetaData.LargeBatch.BatchSequence = j + 1;
+                state.MetaData.GlobalOffSet = j * state.MetaData.LargeBatch.BatchSize;
 
                 using (var scope = _serviceProvider.CreateScope())
                 {

@@ -33,6 +33,11 @@ namespace BatchProcessingEngine
         public int TotalThroughput { get; set; }
 
         /// <summary>
+        /// 全局偏移量
+        /// </summary>
+        public int GlobalOffSet { get; set; }
+
+        /// <summary>
         /// 大批次
         /// </summary>
         public BatchDescriptor LargeBatch { get; set; }

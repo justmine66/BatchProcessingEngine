@@ -10,7 +10,7 @@ namespace BatchETL
         {
             container.AddProcessingServices();
 
-            container.AddSingleton<IDataProvider, SmallBatchDataProvider>();
+            container.AddSingleton<IDataProvider, MicroBatchDataProvider>();
         }
     }
 }

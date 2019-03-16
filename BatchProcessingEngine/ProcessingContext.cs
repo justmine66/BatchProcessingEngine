@@ -64,5 +64,29 @@ namespace BatchProcessingEngine
         /// 检查点标识（上一次处理截止点）
         /// </summary>
         public int CheckPointId { get; set; }
+
+        /// <summary>
+        /// 深复制
+        /// </summary>
+        /// <returns></returns>
+        public BatchDescriptor Copy()
+        {
+            return new BatchDescriptor()
+            {
+                BatchSequence = this.BatchSequence,
+                BatchSize = this.BatchSize,
+                BatchOffset = this.BatchOffset,
+                CheckPointId = this.CheckPointId
+            };
+        }
+
+        /// <summary>
+        /// 浅克隆
+        /// </summary>
+        /// <returns></returns>
+        public BatchDescriptor Clone()
+        {
+            return (BatchDescriptor) this.MemberwiseClone();
+        }
     }
 }

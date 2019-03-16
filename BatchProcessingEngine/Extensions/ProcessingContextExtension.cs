@@ -20,7 +20,7 @@
         }
 
         /// <summary>
-        /// 克隆 - 深复制
+        /// 深复制
         /// </summary>
         public static ProcessingContext Copy(this ProcessingContext context)
         {
@@ -29,8 +29,8 @@
                 MetaData = new ProcessingMetaData()
                 {
                     TotalThroughput = context.MetaData.TotalThroughput,
-                    LargeBatch = context.MetaData.LargeBatch,
-                    SmallBatch = context.MetaData.SmallBatch
+                    LargeBatch = context.MetaData.LargeBatch.Copy(),
+                    SmallBatch = context.MetaData.SmallBatch.Copy()
                 },
                 Services = context.Services,
                 DataHandler = context.DataHandler,

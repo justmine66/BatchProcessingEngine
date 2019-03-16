@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BatchETL
@@ -24,6 +25,8 @@ namespace BatchETL
 
             foreach (var payload in payloads)
                 Console.WriteLine($@"[{context.MetaData.LargeBatch.BatchSequence}-{context.MetaData.SmallBatch.BatchSequence}]Start handling: {payload}");
+
+            context.MetaData.LargeBatch.CheckPointId = payloads.Max(it => it.Id);
 
             return Task.CompletedTask;
         }

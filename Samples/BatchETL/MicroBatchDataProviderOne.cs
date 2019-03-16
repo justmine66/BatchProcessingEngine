@@ -5,16 +5,15 @@ using System.Threading.Tasks;
 
 namespace BatchETL
 {
-    public class MicroBatchDataProvider : IDataProvider
+    public class MicroBatchDataProviderOne : IDataProvider
     {
         public async Task<dynamic> GetBatchDataAsync(ProcessingContext context)
         {
             var batchSize = context.MetaData.SmallBatch.BatchSize;
-            var offsetFrom = context.BatchOffsetFrom();
-            var offsetTo = offsetFrom + batchSize;
+            var checkPointId = context.MetaData.LargeBatch.CheckPointId;
 
-            var payloads = InMemoryDb.Payloads
-                .Where(it => it.Id >= offsetFrom && it.Id < offsetTo)
+            var payloads = InMemoryDb.IrregularPayloads
+                .Where(it => it.Id > checkPointId)
                 .Take(batchSize);
 
             return payloads;
@@ -22,12 +21,12 @@ namespace BatchETL
 
         public Task<int> GetCheckPointIdAsync()
         {
-            return Task.FromResult(InMemoryDb.Payloads.Min(it => it.Id));
+            return Task.FromResult(InMemoryDb.IrregularPayloads.Min(it => it.Id));
         }
 
         public Task<int> GetTotalSizeAsync()
         {
-            return Task.FromResult(InMemoryDb.Payloads.Count);
+            return Task.FromResult(InMemoryDb.IrregularPayloads.Count);
         }
     }
 }

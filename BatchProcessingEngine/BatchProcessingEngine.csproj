@@ -7,7 +7,10 @@
     <RepositoryUrl>https://github.com/justmine66/BatchProcessingEngine</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>BatchProcessingEngine</PackageTags>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/justmine66/BatchProcessingEngine</PackageProjectUrl>
+    <Description>Batch Processing Engine</Description>
   </PropertyGroup>
 
   <ItemGroup>

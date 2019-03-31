@@ -1,4 +1,5 @@
-﻿using BatchProcessingEngine.WorkPool;
+﻿using BatchProcessingEngine.Eventting;
+using BatchProcessingEngine.WorkPool;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BatchProcessingEngine.Extensions
@@ -15,6 +16,8 @@ namespace BatchProcessingEngine.Extensions
 
             container.AddSingleton<IMiddlewareFactory, MiddlewareFactory>();
             container.AddSingleton<IProcessingPipeLineBuilder, ProcessingPipeLineBuilder>();
+
+            container.AddSingleton<IApplicationSource, ApplicationSourceImpl>();
 
             return container;
         }

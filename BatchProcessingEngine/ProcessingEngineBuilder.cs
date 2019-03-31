@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using BatchProcessingEngine.Eventting;
 
 namespace BatchProcessingEngine
 {
@@ -33,12 +34,13 @@ namespace BatchProcessingEngine
             var options = _container.GetRequiredService<IOptions<ProcessingOptions>>();
             var scheduler = _container.GetRequiredService<IScheduler>();
             var logger = _container.GetRequiredService<ILogger<ProcessingEngine>>();
+            var source = _container.GetRequiredService<IApplicationSource>();
             var contextBuilder = new ProcessingContextBuilder()
                 .AddServices(_container)
                 .AddDataHandler(pipeLineBuilder.Build())
                 .AddOptions(options.Value);
 
-            var engine = new ProcessingEngine(scheduler, dataProvider, logger, contextBuilder);
+            var engine = new ProcessingEngine(scheduler, source, dataProvider, logger, contextBuilder);
             return engine;
         }
     }

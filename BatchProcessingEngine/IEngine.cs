@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 namespace BatchProcessingEngine
@@ -11,6 +11,6 @@ namespace BatchProcessingEngine
         /// <summary>
         /// 启动整个数据处理管道.
         /// </summary>
-        Task StartAsync();
+        Task StartAsync(CancellationToken cancellationToken = default(CancellationToken));
     }
 }

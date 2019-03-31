@@ -31,7 +31,7 @@ namespace BatchProcessingEngine
             _source = source;
         }
 
-        public async Task StartAsync()
+        public async Task StartAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             CheckOnlyStartedOnce();
 

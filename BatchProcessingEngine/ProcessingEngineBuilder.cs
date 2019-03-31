@@ -9,11 +9,11 @@ namespace BatchProcessingEngine
 {
     public class ProcessingEngineBuilder : IEngineBuilder
     {
-        private readonly IServiceProvider _container;
+        private readonly IServiceProvider _serviceLocator;
         private readonly List<Action<IProcessingPipeLineBuilder>> _configures = new List<Action<IProcessingPipeLineBuilder>>();
-        public ProcessingEngineBuilder(IServiceProvider container)
+        public ProcessingEngineBuilder(IServiceProvider serviceLocator)
         {
-            _container = container;
+            _serviceLocator = serviceLocator;
         }
 
         public IEngineBuilder ConfigureProcessingPipeLine(Action<IProcessingPipeLineBuilder> configure)
@@ -24,19 +24,19 @@ namespace BatchProcessingEngine
 
         public IEngine Build()
         {
-            var pipeLineBuilder = new ProcessingPipeLineBuilder { Services = _container };
+            var pipeLineBuilder = new ProcessingPipeLineBuilder { Services = _serviceLocator };
             foreach (var configure in _configures)
             {
                 configure(pipeLineBuilder);
             }
 
-            var dataProvider = _container.GetRequiredService<IDataProvider>();
-            var options = _container.GetRequiredService<IOptions<ProcessingOptions>>();
-            var scheduler = _container.GetRequiredService<IScheduler>();
-            var logger = _container.GetRequiredService<ILogger<ProcessingEngine>>();
-            var source = _container.GetRequiredService<IApplicationSource>();
+            var dataProvider = _serviceLocator.GetRequiredService<IDataProvider>();
+            var options = _serviceLocator.GetRequiredService<IOptions<ProcessingOptions>>();
+            var scheduler = _serviceLocator.GetRequiredService<IScheduler>();
+            var logger = _serviceLocator.GetRequiredService<ILogger<ProcessingEngine>>();
+            var source = _serviceLocator.GetRequiredService<IApplicationSource>();
             var contextBuilder = new ProcessingContextBuilder()
-                .AddServices(_container)
+                .AddServices(_serviceLocator)
                 .AddDataHandler(pipeLineBuilder.Build())
                 .AddOptions(options.Value);
 

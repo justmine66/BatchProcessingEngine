@@ -8,8 +8,7 @@ namespace BatchETL
 
         static InMemoryDb()
         {
-            var length = 20;
-            for (var i = 1; i <= length; i++)
+            for (var i = 1; i <= 20; i++)
                 Payloads.Add(new PayLoad() { Id = i, Content = $"第{i}条内容" });
         }
     }

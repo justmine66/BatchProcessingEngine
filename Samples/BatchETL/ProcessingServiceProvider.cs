@@ -30,11 +30,9 @@ namespace BatchETL
                     logging.ClearProviders();
                     logging.AddConsole();
                 })
-                .AddOptions()
-                .AddSingleton<IConfiguration>(config)
-                .Configure<ProcessingOptions>(config.GetSection(nameof(ProcessingOptions)));
+                .AddSingleton<IConfiguration>(config);
 
-            Bootstrapper.RegisterServices(container);
+            Bootstrapper.RegisterServices(container, config);
 
             return container.BuildServiceProvider(); 
         }

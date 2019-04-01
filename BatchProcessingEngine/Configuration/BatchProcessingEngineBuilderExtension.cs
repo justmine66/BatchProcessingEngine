@@ -5,7 +5,7 @@ namespace BatchProcessingEngine.Configuration
 {
     public static class BatchProcessingEngineBuilderExtension
     {
-        public static BatchProcessingEngineBuilder SetBatchProcessingEngine(this BatchProcessingEngineBuilder builder, float batchProcessingFactor = 1f, float microBatchProcessingFactor = 0.2f)
+        public static IBatchProcessingEngineBuilder SetBatchProcessingEngine(this IBatchProcessingEngineBuilder builder, float batchProcessingFactor = 1f, float microBatchProcessingFactor = 0.2f)
         {
             builder.Services.Add(ServiceDescriptor.Singleton<IConfigureOptions<ProcessingOptions>>(
                 new ConfigureProcessingOptions(batchProcessingFactor, microBatchProcessingFactor)));

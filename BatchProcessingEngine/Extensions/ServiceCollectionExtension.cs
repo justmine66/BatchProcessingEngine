@@ -23,7 +23,7 @@ namespace BatchProcessingEngine.Extensions
             container.AddOptions();
 
             container.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<ProcessingOptions>>(
-                new ConfigurationProcessingOptions()));
+                new ConfigureProcessingOptions()));
 
             container.AddSingleton<IEngine, ProcessingEngine>();
             container.AddSingleton<IScheduler, ProcessingScheduler>();

@@ -1,4 +1,4 @@
-﻿namespace BatchProcessingEngine
+﻿namespace BatchProcessingEngine.Configuration
 {
     public class ProcessingOptions
     {

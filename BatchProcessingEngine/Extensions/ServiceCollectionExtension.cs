@@ -1,6 +1,10 @@
-﻿using BatchProcessingEngine.Eventing;
+﻿using System;
+using BatchProcessingEngine.Configuration;
+using BatchProcessingEngine.Eventing;
 using BatchProcessingEngine.WorkPool;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 
 namespace BatchProcessingEngine.Extensions
 {
@@ -8,6 +12,14 @@ namespace BatchProcessingEngine.Extensions
     {
         public static IServiceCollection AddProcessingServices(this IServiceCollection container)
         {
+            if (container == null)
+                throw new ArgumentNullException(nameof(container));
+
+            container.AddOptions();
+
+            container.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<ProcessingOptions>>(
+                new ConfigurationProcessingOptions()));
+
             container.AddSingleton<IEngine, ProcessingEngine>();
             container.AddSingleton<IScheduler, ProcessingScheduler>();
 

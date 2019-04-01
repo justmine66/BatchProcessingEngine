@@ -1,5 +1,5 @@
-﻿using System;
-using BatchProcessingEngine.Notifications;
+﻿using BatchProcessingEngine.Notifications;
+using System;
 
 namespace BatchETL
 {
@@ -9,7 +9,7 @@ namespace BatchETL
         {
             if (evt is ProcessingEngineCompletedEvent)
             {
-                Console.WriteLine($"{evt}");
+                Console.WriteLine($"Processing Completed Notifier: {evt}");
             }
         }
     }

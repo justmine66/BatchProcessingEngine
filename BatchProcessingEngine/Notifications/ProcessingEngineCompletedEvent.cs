@@ -8,16 +8,16 @@ namespace BatchProcessingEngine.Notifications
             : base(source)
         {
             TotalSize = totalSize;
-            ElapsedInSeconds = (int)elapsed.TotalSeconds;
+            ElapsedInSeconds = elapsed.TotalSeconds;
         }
 
         public int TotalSize { get; set; }
 
-        public int ElapsedInSeconds { get; set; }
+        public double ElapsedInSeconds { get; set; }
 
         public override string ToString()
         {
-            return $"{{TotalSize: {TotalSize}, Elapsed: {ElapsedInSeconds}}}";
+            return $"{{TotalSize: {TotalSize}, Elapsed: {ElapsedInSeconds}s}}";
         }
     }
 }

@@ -18,6 +18,8 @@ namespace BatchETL
                     .Build();
 
                 await engine.StartAsync();
+
+                Console.WriteLine(@"========================");
             }
             catch (Exception e)
             {

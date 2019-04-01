@@ -9,8 +9,11 @@ namespace BatchETL
     {
         public async Task<dynamic> GetBatchDataAsync(ProcessingContext context)
         {
-            var batchSize = context.MetaData.SmallBatch.BatchSize;
-            var offsetFrom = context.BatchOffsetFrom();
+            var largeBatch = context.MetaData.LargeBatch;
+            var smallBatch = context.MetaData.SmallBatch;
+
+            var batchSize = smallBatch.BatchSize;
+            var offsetFrom = largeBatch.CheckPointId;
             var offsetTo = offsetFrom + batchSize;
 
             var payloads = InMemoryDb.Payloads

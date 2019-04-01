@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using BatchProcessingEngine.Eventing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using BatchProcessingEngine.Eventting;
 
 namespace BatchProcessingEngine
 {
@@ -34,7 +34,7 @@ namespace BatchProcessingEngine
             var options = _serviceLocator.GetRequiredService<IOptions<ProcessingOptions>>();
             var scheduler = _serviceLocator.GetRequiredService<IScheduler>();
             var logger = _serviceLocator.GetRequiredService<ILogger<ProcessingEngine>>();
-            var source = _serviceLocator.GetRequiredService<IApplicationSource>();
+            var source = _serviceLocator.GetRequiredService<IApplicationListenerSource>();
             var contextBuilder = new ProcessingContextBuilder()
                 .AddServices(_serviceLocator)
                 .AddDataHandler(pipeLineBuilder.Build())

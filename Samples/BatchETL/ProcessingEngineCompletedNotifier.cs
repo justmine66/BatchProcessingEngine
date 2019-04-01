@@ -1,5 +1,5 @@
-﻿using BatchProcessingEngine.Eventting;
-using System;
+﻿using System;
+using BatchProcessingEngine.Eventing;
 
 namespace BatchETL
 {

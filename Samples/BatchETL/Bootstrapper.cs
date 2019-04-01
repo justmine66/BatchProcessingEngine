@@ -1,7 +1,8 @@
 ﻿using BatchProcessingEngine;
-using BatchProcessingEngine.Eventting;
+using BatchProcessingEngine.Eventing;
 using BatchProcessingEngine.Extensions;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace BatchETL
 {
@@ -12,7 +13,7 @@ namespace BatchETL
             container.AddProcessingServices();
 
             container.AddSingleton<IDataProvider, MicroBatchDataProvider>();
-            container.AddSingleton<IApplicationListener, ProcessingEngineCompletedNotifier>();
+            container.TryAddEnumerable(ServiceDescriptor.Singleton<IApplicationListener, ProcessingEngineCompletedNotifier>());
         }
     }
 }

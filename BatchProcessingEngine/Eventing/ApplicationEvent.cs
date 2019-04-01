@@ -1,4 +1,4 @@
-﻿namespace BatchProcessingEngine.Eventting
+﻿namespace BatchProcessingEngine.Eventing
 {
     /// <summary>
     /// 表示一个应用程序事件
@@ -13,6 +13,6 @@
         /// <summary>
         /// 事件源
         /// </summary>
-        object Source { get; set; }
+        public object Source { get; set; }
     }
 }

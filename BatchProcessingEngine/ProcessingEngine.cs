@@ -1,9 +1,9 @@
-﻿using BatchProcessingEngine.Eventting;
-using BatchProcessingEngine.Exceptions;
+﻿using BatchProcessingEngine.Exceptions;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using BatchProcessingEngine.Eventing;
 
 namespace BatchProcessingEngine
 {
@@ -15,11 +15,11 @@ namespace BatchProcessingEngine
         private readonly IScheduler _scheduler;
         private readonly IDataProvider _dataProvider;
         private readonly ProcessingContextBuilder _contextBuilder;
-        private readonly IApplicationSource _source;
+        private readonly IApplicationListenerSource _source;
 
         public ProcessingEngine(
             IScheduler scheduler,
-            IApplicationSource source,
+            IApplicationListenerSource source,
             IDataProvider dataProvider,
             ILogger<ProcessingEngine> logger,
             ProcessingContextBuilder contextBuilder)
@@ -53,7 +53,7 @@ namespace BatchProcessingEngine
 
             await _scheduler.ScheduleAsync(context);
 
-            _source.Puslish(new ProcessingEngineCompletedEvent(this, totalSize, watcher.Elapsed));
+            _source.Publish(new ProcessingEngineCompletedEvent(this, totalSize, watcher.Elapsed));
         }
 
         private void CheckOnlyStartedOnce()

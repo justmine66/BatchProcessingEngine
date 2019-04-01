@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace BatchProcessingEngine.Eventing
+namespace BatchProcessingEngine.Notifications
 {
     public class ApplicationListenerSourceImpl : IApplicationListenerSource
     {

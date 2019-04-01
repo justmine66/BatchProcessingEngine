@@ -1,4 +1,4 @@
-﻿namespace BatchProcessingEngine.Eventing
+﻿namespace BatchProcessingEngine.Notifications
 {
     /// <summary>
     /// 应用程序事件监听器

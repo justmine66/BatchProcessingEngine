@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using BatchProcessingEngine.Configuration;
-using BatchProcessingEngine.Eventing;
+using BatchProcessingEngine.Notifications;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 

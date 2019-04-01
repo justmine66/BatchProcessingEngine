@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BatchProcessingEngine.Eventing
+namespace BatchProcessingEngine.Notifications
 {
     public class ProcessingEngineCompletedEvent : ApplicationEvent
     {

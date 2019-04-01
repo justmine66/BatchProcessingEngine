@@ -1,6 +1,6 @@
 ﻿using BatchProcessingEngine;
-using BatchProcessingEngine.Eventing;
 using BatchProcessingEngine.Extensions;
+using BatchProcessingEngine.Notifications;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 

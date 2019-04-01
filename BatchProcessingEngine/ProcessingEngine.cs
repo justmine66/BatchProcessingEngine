@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using BatchProcessingEngine.Eventing;
+using BatchProcessingEngine.Notifications;
 
 namespace BatchProcessingEngine
 {

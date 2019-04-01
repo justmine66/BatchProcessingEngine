@@ -1,5 +1,5 @@
 ﻿using System;
-using BatchProcessingEngine.Eventing;
+using BatchProcessingEngine.Notifications;
 
 namespace BatchETL
 {

@@ -1,10 +1,10 @@
 ﻿using BatchProcessingEngine.Configuration;
-using BatchProcessingEngine.Eventing;
 using BatchProcessingEngine.WorkPool;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using System;
+using BatchProcessingEngine.Notifications;
 
 namespace BatchProcessingEngine.Extensions
 {

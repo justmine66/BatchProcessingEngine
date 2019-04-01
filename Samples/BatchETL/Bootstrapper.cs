@@ -15,7 +15,7 @@ namespace BatchETL
             container.AddProcessingServices(configure =>
             {
                 var options = configuration.GetSection(nameof(ProcessingOptions));
-                configure.SetBatchProcessingEngine(options.GetValue<float>(nameof(ProcessingOptions.BatchProcessingFactor)), options.GetValue<float>(nameof(ProcessingOptions.MicroBatchProcessingFactor)));
+                configure.SetBatchProcessingEngine(options.GetValue<int>(nameof(ProcessingOptions.LargeBatchSize)), options.GetValue<int>(nameof(ProcessingOptions.MicroBatchSize)));
             });
 
             container.AddSingleton<IDataProvider, MicroBatchDataProvider>();

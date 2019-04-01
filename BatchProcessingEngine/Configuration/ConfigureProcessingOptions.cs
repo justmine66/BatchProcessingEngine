@@ -4,11 +4,11 @@ namespace BatchProcessingEngine.Configuration
 {
     public class ConfigureProcessingOptions : ConfigureOptions<ProcessingOptions>
     {
-        public ConfigureProcessingOptions(float batchProcessingFactor = 1, float microBatchProcessingFactor = 0.2f) : base(options =>
-                {
-                    options.BatchProcessingFactor = batchProcessingFactor;
-                    options.MicroBatchProcessingFactor = microBatchProcessingFactor;
-                })
+        public ConfigureProcessingOptions(int largeBatchSize = 1000, int microBatchSize = 100) : base(options =>
+                    {
+                        options.LargeBatchSize = largeBatchSize;
+                        options.MicroBatchSize = microBatchSize;
+                    })
         { }
     }
 }
